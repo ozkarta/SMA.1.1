@@ -6,6 +6,8 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Collections;
 using System.Diagnostics;
+using System.Net.Mail;
+using System.Net;
 
 namespace SMA.CS
 {
@@ -186,6 +188,38 @@ namespace SMA.CS
         }
 
 
+
+        public static bool sendConfirmationEmail(string mailTo,string userName,string activationCode,string fname,string lname)
+        {
+            using (MailMessage mm = new MailMessage("ozbegi@gmail.com", mailTo))
+            {
+                mm.Subject = "Account Activation";
+                string body = "Hello " +"<h1>"+fname+lname+"('"+ userName+ "')"+ "<h1/>"+",";
+                body += "<br /><br />Please click the following link to activate your account";
+                body += "<br /><a href = '" + "http://localhost:51857/Account/EmailConfirmation?userGUID=" + activationCode + "'>Click here to activate your account.</a>";
+                body += "<br /><br />Thanks";
+                mm.Body = body;
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                NetworkCredential NetworkCred = new NetworkCredential("ozbegi1@gmail.com", "1donozok1");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                try
+                {
+                    smtp.Send(mm);
+                    return true;
+                }
+                catch(Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                    return false;
+                }
+               
+            }
+        }
     }
 
 }

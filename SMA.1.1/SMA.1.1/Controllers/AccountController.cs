@@ -39,6 +39,9 @@ namespace SMA.Controllers
                         if (GlobalMethods.registerUser(defaultLanguage, userName, firstName, lastName, phone, email, password))
                         {
                             ViewBag.ErrorMessage = "";
+                            ViewBag.Message = "Registration was complete succesfully, To activate your profile please  check " +
+                                                " mail  <h4>"+email+"</h4>  and follow  instructions  ";
+
                             return View("RegisterValidation");
                         }
                         else

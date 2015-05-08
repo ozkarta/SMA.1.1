@@ -56,8 +56,7 @@ namespace SMA.CS
             string salt = generateSalt();
             string hashedPswd = generateHashedPSWD(password, salt);
             return Comunication.generalRegistration(defaultLanguage, userName, firstName, lastName, phone, email, hashedPswd, salt);
-            //Debug.WriteLine(hashedPassword);
-            //Debug.WriteLine();
+            
         }
 
 
@@ -100,6 +99,10 @@ namespace SMA.CS
 
             return Convert.ToBase64String(algorithm.ComputeHash(plainTextWithSaltBytes));
         }
+
+
+        //____________________________________________________________________________________________________________---
+
 
     }
 }
