@@ -2,6 +2,7 @@
 go
 delete from languages
 delete from variables
+delete  from accessLevels
 
 declare @en as varchar(50)
 set @en=newid()
@@ -25,8 +26,30 @@ values  (@en,newid(),'home','Home'),
 		(@ge,newid(),'login',N'სისტემაში შესვლა'),
 		(@ge,newid(),'register',N'რეგისტრაცია')
 go
+declare @counter as integer
+set @counter=1
+insert into accessLevels(levelGUID,levelName,[level])
+	values(newid(),'visitor',@counter)
+	set @counter=@counter+1
+insert into accessLevels(levelGUID,levelName,[level])
+	values(newid(),'client',@counter)
+	set @counter=@counter+1
+insert into accessLevels(levelGUID,levelName,[level])
+	values(newid(),'company_worker',@counter)
+	set @counter=@counter+1
+insert into accessLevels(levelGUID,levelName,[level])
+	values(newid(),'company_HR',@counter)
+	set @counter=@counter+1
+insert into accessLevels(levelGUID,levelName,[level])
+	values(newid(),'company_manager',@counter)
+	set @counter=@counter+1
+insert into accessLevels(levelGUID,levelName,[level])
+	values(newid(),'ozzle_administration',@counter)
+	set @counter=@counter+1
+insert into accessLevels(levelGUID,levelName,[level])
+	values(newid(),'ozzle_manager',@counter)
+	set @counter=@counter+1
 
+go
 
-select * from variables
-
-select * from languages
+select * from accessLevels
