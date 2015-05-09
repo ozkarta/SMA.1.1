@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Threading;
 
 namespace SMA.Controllers
 {
@@ -89,8 +90,16 @@ namespace SMA.Controllers
         public RedirectToRouteResult EmailConfirmation()
         {
             string userGUID = Request["userGUID"].ToString();
-            //Comunication.activateUser(userGUID);
-            return RedirectToAction("Index", "Home");
+            if(Comunication.activateUser(userGUID))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return RedirectToAction("Error", "Shared");
+            }
+
+           
         }
     }
 }

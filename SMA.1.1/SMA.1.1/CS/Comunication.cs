@@ -172,7 +172,8 @@ namespace SMA.CS
                     {
                         con.Open();
 
-                        cmd.ExecuteScalar();
+                        string userGUID=cmd.ExecuteScalar().ToString();
+                        sendConfirmationEmail(email, userName, userGUID, firstName, lastName);
                         con.Close();
                         return true;
                     }
@@ -218,6 +219,33 @@ namespace SMA.CS
                     return false;
                 }
                
+            }
+        }
+
+        public static bool activateUser(string userGUID)
+        {
+            using(con=new SqlConnection(connectionString ))
+            {
+                using (cmd=new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText="activateUser";
+                    cmd.Parameters.AddWithValue("@userGUID", userGUID);
+
+                    try
+                    {
+                        con.Open();
+                        cmd.ExecuteScalar();
+                        con.Close();
+                        return true;
+                    }
+                    catch(Exception ex)
+                    {
+                        Debug.WriteLine(ex.ToString());
+                        return false;
+                    }
+                }
             }
         }
     }
