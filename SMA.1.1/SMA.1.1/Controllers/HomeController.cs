@@ -5,9 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using SMA.CS;
 using System.Diagnostics;
+using SMA._1._1.CS.Authentication;
 namespace SMA.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : myControler
     {
 
         //_____________________MENUE__ACTIONS______________________________________________
@@ -23,7 +24,7 @@ namespace SMA.Controllers
 
             return View();
         }
-
+        
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

@@ -14,7 +14,8 @@ namespace SMA.CS
     public static class Comunication
     {
         //static String connectionString = "Data Source=tcp:78.139.172.254,1973;Initial Catalog=smaDataBase;User ID=sa;Password=12qwert12";
-        static string connectionString=@"Data Source=OZKARTA\OZKARTA;Initial Catalog=smaDataBase;Integrated Security=True";
+        //static string connectionString=@"Data Source=OZKARTA\OZKARTA;Initial Catalog=smaDataBase;Integrated Security=True";
+        static String connectionString  = @"Data Source=SPARE-PC\SQLEXPRESS;Initial Catalog=smaDataBase;Integrated Security=True";
        static  SqlConnection con;
        static  SqlDataAdapter adapter;
        static  SqlCommand cmd;
@@ -241,6 +242,49 @@ namespace SMA.CS
                         return true;
                     }
                     catch(Exception ex)
+                    {
+                        Debug.WriteLine(ex.ToString());
+                        return false;
+                    }
+                }
+            }
+        }
+
+
+        public static bool checkUserAndPassword(string user,string password)
+        {
+            using (con = new SqlConnection(connectionString))
+            {
+                using (cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "getSalt";
+                    cmd.Parameters.AddWithValue("@user", user);
+                    
+                    try
+                    {
+                        con.Open();
+                        string userSalt=cmd.ExecuteScalar() as string;
+                        string newPasswordHash = GlobalMethods.generateHashedPSWD(password, userSalt);
+
+                        cmd.CommandText = "compareHashedPasswords";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@newPasswordHash", newPasswordHash);
+
+                        string result = cmd.ExecuteScalar() as string;
+                        con.Close();
+
+                        if (result.Trim().Equals("1"))
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    catch (Exception ex)
                     {
                         Debug.WriteLine(ex.ToString());
                         return false;

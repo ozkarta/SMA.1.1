@@ -58,7 +58,10 @@ namespace SMA.CS
             return Comunication.generalRegistration(defaultLanguage, userName, firstName, lastName, phone, email, hashedPswd, salt);
             
         }
-
+        public static bool logInCheck(string user,string pass)
+        {
+            return Comunication.checkUserAndPassword(user, pass);            
+        }
 
 
 

@@ -32,22 +32,22 @@ insert into accessLevels(levelGUID,levelName,[level])
 	values(newid(),'visitor',@counter)
 	set @counter=@counter+1
 insert into accessLevels(levelGUID,levelName,[level])
-	values(newid(),'client',@counter)
+	values(newid(),'Client',@counter)
 	set @counter=@counter+1
 insert into accessLevels(levelGUID,levelName,[level])
-	values(newid(),'company_worker',@counter)
+	values(newid(),'CompanyWorker',@counter)
 	set @counter=@counter+1
 insert into accessLevels(levelGUID,levelName,[level])
-	values(newid(),'company_HR',@counter)
+	values(newid(),'CompanyHR',@counter)
 	set @counter=@counter+1
 insert into accessLevels(levelGUID,levelName,[level])
-	values(newid(),'company_manager',@counter)
+	values(newid(),'CompanyManager',@counter)
 	set @counter=@counter+1
 insert into accessLevels(levelGUID,levelName,[level])
-	values(newid(),'ozzle_administration',@counter)
+	values(newid(),'SMAAdministrator',@counter)
 	set @counter=@counter+1
 insert into accessLevels(levelGUID,levelName,[level])
-	values(newid(),'ozzle_manager',@counter)
+	values(newid(),'SMAManager',@counter)
 	set @counter=@counter+1
 
 go

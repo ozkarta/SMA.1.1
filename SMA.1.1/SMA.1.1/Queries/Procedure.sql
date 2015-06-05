@@ -84,3 +84,11 @@ begin
 end
 go
 ------------------------------------------------
+
+create procedure getSalt
+@user  varchar( max )
+as
+begin
+	select salt from usersGeneral where userName=@user and emailConfirmed='1' 
+end
+go

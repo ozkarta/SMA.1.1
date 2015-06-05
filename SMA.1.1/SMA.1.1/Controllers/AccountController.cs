@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Threading;
+using SMA._1._1.CS.Authentication;
 
 namespace SMA.Controllers
 {
@@ -72,10 +73,23 @@ namespace SMA.Controllers
             }
         }
 
-
+        [HttpPost]
         public ActionResult LogInValidation()
         {
-            return View("LogInValidation");
+            string userName = Request["user_name"].ToString();
+            string password = Request["password"].ToString();
+
+            if (GlobalMethods.logInCheck(userName, password))
+            {
+                sessionPersister.userName = userName;
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "UserName or Password Is incorrect";
+                return View("LogIn");
+            }
+            
         }
 
         public ActionResult Register()
@@ -85,6 +99,7 @@ namespace SMA.Controllers
         }
         public ActionResult LogIn()
         {
+            ViewBag.ErrorMessage = "";
             return View("LogIn");
         }
         public RedirectToRouteResult EmailConfirmation()
@@ -100,6 +115,12 @@ namespace SMA.Controllers
             }
 
            
+        }
+
+        public ActionResult logout()
+        {
+            sessionPersister.logout();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
