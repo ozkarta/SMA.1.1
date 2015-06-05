@@ -92,3 +92,21 @@ begin
 	select salt from usersGeneral where userName=@user and emailConfirmed='1' 
 end
 go
+
+
+create procedure compareHashedPasswords
+@newPasswordHash as varchar(max)
+as
+begin
+	if exists (select * from usersGeneral where passwordHash=@newPasswordHash)
+		begin
+			select	'1'
+		end
+	else
+		begin
+			select '0'
+		end
+	
+end
+
+go

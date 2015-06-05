@@ -118,7 +118,7 @@ namespace SMA._1._1.CS.Authentication
             }
             set { HttpContext.Current.Session[userRoleSessionVarialbe] = value; }
         }
-
+        //______________________________________________________________________________
         public static void logout()
         {
             HttpContext.Current.Session[userRoleSessionVarialbe] = null;

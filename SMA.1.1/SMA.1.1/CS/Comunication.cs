@@ -8,6 +8,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.Net.Mail;
 using System.Net;
+using SMA._1._1.CS.Authentication;
 
 namespace SMA.CS
 {
@@ -271,8 +272,13 @@ namespace SMA.CS
                         cmd.CommandText = "compareHashedPasswords";
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@newPasswordHash", newPasswordHash);
-
                         string result = cmd.ExecuteScalar() as string;
+
+                        cmd.CommandText = "getAccessLevel";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@user", user);
+                        sessionPersister.userRole = cmd.ExecuteScalar() as string;
+                        
                         con.Close();
 
                         if (result.Trim().Equals("1"))
