@@ -278,7 +278,12 @@ namespace SMA.CS
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@user", user);
                         sessionPersister.userRole = cmd.ExecuteScalar() as string;
-                        
+
+                        cmd.CommandText = "getUserGUID";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@user", user);
+                        sessionPersister.userGUID = cmd.ExecuteScalar() as string;
+
                         con.Close();
 
                         if (result.Trim().Equals("1"))

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Collections;
 using System.Web.Mvc;
+using SMA._1._1.CS.Authentication;
+using System.Diagnostics;
 
 namespace SMA.CS
 {
@@ -11,28 +13,15 @@ namespace SMA.CS
     {
         public static Hashtable variableTable;
         public static Hashtable languageTable;
-        public static string currentLanguageTrial;
-        public static string currentLanguage;
+        //public static string currentLanguageTrial;
+        //public static string currentLanguage;
         public static List<SelectListItem> languageListItems = new List<SelectListItem>();
 
 
         public static void initVariables()
         {
-            //_________________Gets_Language_List_From_DataBase___________________________________
-            
 
-            //________________Sets_Languages_Manually__________________________________________________
-
-            
-
-            //_________________Adds_Variables_Manually__________________________________________________
-           
-
-           
-
-
-            //___________________Gets_Translated_Variable_Values_From_DataBase___________________________
-            Comunication.setVariables(languageTable[currentLanguageTrial].ToString(),variableTable);
+            Comunication.setVariables(languageTable[sessionPersister.currentLanguageTrial].ToString(), variableTable);
             initDropDownList();
         }
         public static void initDropDownList()
@@ -43,7 +32,7 @@ namespace SMA.CS
             {
                 
                 SelectListItem i = new SelectListItem() { Text = lang.Key.ToString(), Value = lang.Value.ToString() };
-                if (i.Text == GlobalVariables.currentLanguage)
+                if (i.Text == sessionPersister.currentLanguage)
                 {
                     i.Selected = true;
                 }
@@ -63,6 +52,8 @@ namespace SMA.CS
 
         public static string getVariableValue(string key)
         {
+
+            Debug.WriteLine(sessionPersister.currentLanguage);
             string toReturn="NULL";
             if (variableTable[key] != null)
             {
@@ -76,8 +67,8 @@ namespace SMA.CS
         public static  void manualInit()
         {
             Comunication.getLanguages(languageTable);
-            currentLanguageTrial = "ქართული";
-            currentLanguage = "ქართული";
+            sessionPersister.currentLanguageTrial = "ქართული";
+            sessionPersister.currentLanguage = "ქართული";
 
             variableTable.Add("home", "");
             variableTable.Add("about", "");
@@ -88,11 +79,11 @@ namespace SMA.CS
         }
          public static void rollBackLanguage()
          {
-             currentLanguageTrial=currentLanguage.ToString();
+             sessionPersister.currentLanguageTrial = sessionPersister.currentLanguage.ToString();
          }
          public static void updateLanguage()
          {
-             currentLanguage = currentLanguageTrial.ToString();
+             sessionPersister.currentLanguage = sessionPersister.currentLanguageTrial.ToString();
          }
 
        

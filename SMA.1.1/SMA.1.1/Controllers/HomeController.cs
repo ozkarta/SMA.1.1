@@ -36,7 +36,7 @@ namespace SMA.Controllers
        
         public RedirectToRouteResult translate()
         {
-            GlobalVariables.currentLanguageTrial = Request["Language"];
+            sessionPersister.currentLanguageTrial = Request["Language"];
             GlobalVariables.initVariables();
     
             return RedirectToAction(Request["currentView"],Request["controller"]);

@@ -63,9 +63,9 @@ as
 begin
 	declare @userGUID varchar(50)
 	set @userGUID=newid()
-	insert into usersGeneral ([languageGUID],[userGUID],[email],[emailConfirmed],[passwordHash],[salt], [phoneNumber],	[phoneNumberConfirmed]	, [accessFailedCount], [userName],[firstName],	
-	[lastName],[country],[city]	,[addressLine1]	,[addressLine2],[birthDate],[passportID],[registerDate]	)
-	values(@defaultLanguage,@userGUID,@email,0,@passwordHash,@salt,@phone,0,0,@userName,@firstName,@lastName,'','','','','','',getdate())
+	insert into usersGeneral ([languageGUID],[userGUID],[levelGUID],[email],[emailConfirmed],[passwordHash],[salt], [phoneNumber],	[phoneNumberConfirmed]	, [accessFailedCount], [userName],[firstName],	
+	[lastName]		,[registerDate]	)
+	values(@defaultLanguage,@userGUID,newid(),@email,0,@passwordHash,@salt,@phone,0,0,@userName,@firstName,@lastName,getdate())
 	select @userGUID
 end
 
@@ -110,3 +110,24 @@ begin
 end
 
 go
+
+
+create procedure getAccessLevel
+@user   as varchar(max)
+as 
+begin
+	declare @roleGUID as   varchar(50)
+	set @roleGUID = (select levelGUID from usersGeneral where userName=@user)
+	select [level]	from accessLevels  where levelGUID=@roleGUID
+end
+
+go
+create procedure  getUserGUID
+
+@user	as varchar(max)
+as 
+begin
+
+	select userGuid from usersGeneral where userName=@user
+end
+go 

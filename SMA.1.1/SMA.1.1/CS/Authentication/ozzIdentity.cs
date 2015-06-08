@@ -71,6 +71,9 @@ namespace SMA._1._1.CS.Authentication
         static string userNameSessionVariable = "username";
         static string emailSessionVariable = "email";
         static string userRoleSessionVarialbe = "role";
+        static string userGUIDSessionVariable = "userGUID";
+        static string currentLanguageTrialSessionVariable = "currentLanguageTrial";
+        static string currentLanguageSessionVariable="currentLanguage";
         public static string userName
         {
             get
@@ -118,12 +121,61 @@ namespace SMA._1._1.CS.Authentication
             }
             set { HttpContext.Current.Session[userRoleSessionVarialbe] = value; }
         }
+
+        public static string userGUID
+        {
+            get
+            {
+                if (HttpContext.Current == null)
+                {
+                    return string.Empty;
+                }
+                var sessionVar = HttpContext.Current.Session[userGUIDSessionVariable];
+                if (sessionVar != null)
+                    return sessionVar as string;
+                return null;
+            }
+            set { HttpContext.Current.Session[userGUIDSessionVariable] = value; }
+        }
+
+        public static string currentLanguageTrial
+        {
+            get
+            {
+                if (HttpContext.Current == null)
+                {
+                    return string.Empty;
+                }
+                var sessionVar = HttpContext.Current.Session[currentLanguageTrialSessionVariable];
+                if (sessionVar != null)
+                    return sessionVar as string;
+                return null;
+            }
+            set { HttpContext.Current.Session[currentLanguageTrialSessionVariable] = value; }
+        }
+        public static string currentLanguage
+        {
+            get
+            {
+                if (HttpContext.Current == null)
+                {
+                    return string.Empty;
+                }
+                var sessionVar = HttpContext.Current.Session[currentLanguageSessionVariable];
+                if (sessionVar != null)
+                    return sessionVar as string;
+                return null;
+            }
+            set { HttpContext.Current.Session[currentLanguageSessionVariable] = value; }
+        }
         //______________________________________________________________________________
         public static void logout()
         {
             HttpContext.Current.Session[userRoleSessionVarialbe] = null;
             HttpContext.Current.Session[emailSessionVariable] = null;
             HttpContext.Current.Session[userNameSessionVariable] = null;
+            HttpContext.Current.Session[userGUIDSessionVariable] = null;
+
         }
     }
 
