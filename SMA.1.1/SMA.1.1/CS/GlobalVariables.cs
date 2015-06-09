@@ -13,11 +13,26 @@ namespace SMA.CS
     {
         public static Hashtable variableTable;
         public static Hashtable languageTable;
+        public static Hashtable accessLevelsTable;
         //public static string currentLanguageTrial;
         //public static string currentLanguage;
         public static List<SelectListItem> languageListItems = new List<SelectListItem>();
+        public static List<SelectListItem> accessLevelsListItems = new List<SelectListItem>();
 
 
+        static GlobalVariables()
+        {
+            variableTable = new Hashtable();
+            languageTable = new Hashtable();
+            accessLevelsTable = new Hashtable();
+
+            manualInit();
+            initVariables();
+            initAccessLevelsList();
+        }
+
+
+        //______________________Language_______________________________________
         public static void initVariables()
         {
 
@@ -41,15 +56,7 @@ namespace SMA.CS
             }
 
         }
-        static GlobalVariables()
-        {
-            variableTable = new Hashtable();
-            languageTable = new Hashtable();
-
-            manualInit();
-            initVariables();
-        }
-
+       
         public static string getVariableValue(string key)
         {
 
@@ -85,7 +92,18 @@ namespace SMA.CS
          {
              sessionPersister.currentLanguage = sessionPersister.currentLanguageTrial.ToString();
          }
+        //____________________ACCESS_LEVELS____________________________________________
 
+         public static void initAccessLevelsList()
+         {
+             Comunication.setAccesLevelHashTable();
+
+             foreach (DictionaryEntry levels in GlobalVariables.accessLevelsTable)
+             {
+                 SelectListItem item = new SelectListItem() { Text = levels.Key.ToString(), Value = levels.Value.ToString() };
+                 accessLevelsListItems.Add(item);
+             }
+         }
        
     }
 }

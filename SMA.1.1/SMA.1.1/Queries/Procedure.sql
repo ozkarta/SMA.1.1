@@ -21,6 +21,12 @@ begin
 end
 go
 
+create procedure getAccessLevelsList
+as
+begin
+	select * from accessLevels where  levelName <>   'visitor'  and levelName <>  'SMAManager' order by level
+end
+go
 ------------------------------------------
 
 create procedure  getTranslatedVariableValue
@@ -58,14 +64,18 @@ create procedure registerUser
 @phone varchar(100),
 @email varchar(500),
 @passwordHash varchar(max),
-@salt varchar(max)
+@salt varchar(max),
+@accessLevelGUID varchar(50),
+@passportId varchar(20)
 as
 begin
+	declare @accesLevelGUID varchar(50)
+	
 	declare @userGUID varchar(50)
 	set @userGUID=newid()
 	insert into usersGeneral ([languageGUID],[userGUID],[levelGUID],[email],[emailConfirmed],[passwordHash],[salt], [phoneNumber],	[phoneNumberConfirmed]	, [accessFailedCount], [userName],[firstName],	
-	[lastName]		,[registerDate]	)
-	values(@defaultLanguage,@userGUID,newid(),@email,0,@passwordHash,@salt,@phone,0,0,@userName,@firstName,@lastName,getdate())
+	[lastName],[passportID]		,[registerDate]	)
+	values(@defaultLanguage,@userGUID,@accessLevelGUID,@email,0,@passwordHash,@salt,@phone,0,0,@userName,@firstName,@lastName,@passportId,getdate())
 	select @userGUID
 end
 
@@ -118,7 +128,7 @@ as
 begin
 	declare @roleGUID as   varchar(50)
 	set @roleGUID = (select levelGUID from usersGeneral where userName=@user)
-	select [level]	from accessLevels  where levelGUID=@roleGUID
+	select levelName	from accessLevels  where levelGUID=@roleGUID
 end
 
 go
@@ -131,3 +141,6 @@ begin
 	select userGuid from usersGeneral where userName=@user
 end
 go 
+getAccessLevel 'ozkarta'
+go
+getUserGUID   'ozkarta'

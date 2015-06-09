@@ -109,6 +109,36 @@ namespace SMA.CS
                    }                
             }
         }
+
+
+        public static void setAccesLevelHashTable()
+        {
+            using (con = new SqlConnection(connectionString))
+            {
+                using (cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "getAccessLevelsList";
+                    try
+                    {
+                        con.Open();
+                        using (reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                GlobalVariables.accessLevelsTable.Add(reader["levelName"], reader["levelGUID"]);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.ToString());
+                    }
+                    
+                }
+            }
+        }
     
 
        
@@ -151,8 +181,8 @@ namespace SMA.CS
             return result;
         }
 
-        public static bool generalRegistration(string defaultLanguage,string userName,string firstName ,string lastName,string phone 
-                                            ,string email ,string password ,string salt)
+        public static bool generalRegistration(string defaultLanguage,string accessLevelGUID,string userName,string firstName ,string lastName,string phone
+                                            , string email, string password, string salt, string passportId)
         {
             using (con=new SqlConnection(connectionString))
             {
@@ -169,7 +199,8 @@ namespace SMA.CS
                     cmd.Parameters.AddWithValue("@email",email);
                     cmd.Parameters.AddWithValue("@passwordHash", password);
                     cmd.Parameters.AddWithValue("@salt", salt);
-
+                    cmd.Parameters.AddWithValue("@accessLevelGUID", accessLevelGUID);
+                    cmd.Parameters.AddWithValue("@passportId", passportId);
                     try
                     {
                         con.Open();
@@ -278,7 +309,8 @@ namespace SMA.CS
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@user", user);
                         sessionPersister.userRole = cmd.ExecuteScalar() as string;
-
+                        
+                       
                         cmd.CommandText = "getUserGUID";
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@user", user);

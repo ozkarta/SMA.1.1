@@ -38,8 +38,14 @@ namespace SMA.Controllers
         {
             sessionPersister.currentLanguageTrial = Request["Language"];
             GlobalVariables.initVariables();
-    
-            return RedirectToAction(Request["currentView"],Request["controller"]);
+            if (sessionPersister.userRole == null)
+            {
+                return RedirectToAction(Request["currentView"], Request["controller"]);
+            }
+            else
+            {
+                return RedirectToAction(Request["currentView"], Request["controller"], new { Area = sessionPersister.userRole });
+            }
         }
 
           

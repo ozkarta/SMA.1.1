@@ -45,6 +45,19 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <h4>Register As </h4>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        @Html.DropDownList("accessLevel", GlobalVariables.accessLevelsListItems, new { text = "Register As" })
+                                    </div>
+                                </div>
+                            </div>
+
 
                             <div class="form-group">
                                 <input type="text" name="user_name" id="user_name" class="form-control input-sm" placeholder="User Name">
@@ -67,6 +80,9 @@
                             </div>
 			    			<div class="form-group">
 			    				<input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+			    			</div>
+                            <div class="form-group">
+			    				<input type="text" name="passportID" id="passportID" class="form-control input-sm" placeholder="Passport Document Number">
 			    			</div>
 
 			    			<div class="row">

@@ -50,12 +50,12 @@ namespace SMA.CS
         {
             return (Comunication.existsUserName(userName)) ;
         }
-        public static bool registerUser(string defaultLanguage,string userName,string firstName ,string lastName,string phone 
-                                                                                            ,string email ,string password )
+        public static bool registerUser(string defaultLanguage,string accessLevel,string userName,string firstName ,string lastName,string phone
+                                                                                            , string email, string password, string passportId)
         {
             string salt = generateSalt();
             string hashedPswd = generateHashedPSWD(password, salt);
-            return Comunication.generalRegistration(defaultLanguage, userName, firstName, lastName, phone, email, hashedPswd, salt);
+            return Comunication.generalRegistration(defaultLanguage, accessLevel, userName, firstName, lastName, phone, email, hashedPswd, salt, passportId);
             
         }
         public static bool logInCheck(string user,string pass)

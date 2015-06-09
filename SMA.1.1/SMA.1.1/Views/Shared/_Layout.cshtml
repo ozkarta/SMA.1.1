@@ -93,7 +93,7 @@
             
             var sa = $("#chooser option:selected").text().toString();
             var urlstring = "../Home/translate?currentView=@action.ToString()" + "&Language=" + sa + "&controller=@controller.ToString()";
-         alert(urlstring)
+            //alert(urlstring)
             document.getElementById("chooser").action = urlstring;
             document.getElementById("chooser").submit();
                          

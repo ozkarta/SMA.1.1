@@ -23,6 +23,7 @@ namespace SMA.Controllers
         {
 
             string defaultLanguage = Request["defaultLanguage"].ToString();
+            string accessLevel = Request["accessLevel"].ToString();
             string userName = Request["user_name"].ToString();
             string firstName = Request["first_name"].ToString();
             string lastName = Request["last_name"].ToString();
@@ -30,6 +31,7 @@ namespace SMA.Controllers
             string email = Request["email"].ToString();
             string password = Request["password"].ToString();
             string passwordConfirmation = Request["password_confirmation"].ToString();
+            string passportId = Request["passportID"].ToString();
 
             if (GlobalMethods.isValidMail(email))
             {
@@ -38,7 +40,7 @@ namespace SMA.Controllers
                     if (!GlobalMethods.userNameValidation(userName))
                     {
 
-                        if (GlobalMethods.registerUser(defaultLanguage, userName, firstName, lastName, phone, email, password))
+                        if (GlobalMethods.registerUser(defaultLanguage, accessLevel, userName, firstName, lastName, phone, email, password, passportId))
                         {
                             ViewBag.ErrorMessage = "";
                             ViewBag.Message = "Registration was complete succesfully, To activate your profile please  check " +
