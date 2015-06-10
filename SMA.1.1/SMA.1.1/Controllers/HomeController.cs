@@ -15,7 +15,30 @@ namespace SMA.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Ozzle Application";
-            return View();
+
+            if (sessionPersister.userRole == null)
+            {
+                return View();
+            }
+            else
+            {
+                string view;
+                string controller;
+                if (!this.ControllerContext.RouteData.Values["controller"].ToString().StartsWith(sessionPersister.userRole))
+                {
+                    controller = sessionPersister.userRole + this.ControllerContext.RouteData.Values["controller"].ToString();
+                    view = this.ControllerContext.RouteData.Values["action"].ToString();
+                }
+                else
+                {
+                    view = this.ControllerContext.RouteData.Values["action"].ToString();
+                    controller = this.ControllerContext.RouteData.Values["controller"].ToString();
+                }
+
+                return RedirectToAction(view, controller, new { Area = sessionPersister.userRole });
+            }
+
+            
         }
 
         public ActionResult About()
@@ -44,7 +67,20 @@ namespace SMA.Controllers
             }
             else
             {
-                return RedirectToAction(Request["currentView"], Request["controller"], new { Area = sessionPersister.userRole });
+                string view;
+                string controller;
+                if(!Request["controller"].StartsWith (sessionPersister.userRole))
+                {
+                    controller= sessionPersister.userRole+Request["controller"];
+                    view=Request["currentView"];
+                }
+                else
+                {
+                    view=Request["currentView"];
+                    controller = Request["controller"];
+                }
+                
+                return RedirectToAction(view,controller, new { Area = sessionPersister.userRole });
             }
         }
 

@@ -15,8 +15,8 @@ namespace SMA.CS
     public static class Comunication
     {
         //static String connectionString = "Data Source=tcp:78.139.172.254,1973;Initial Catalog=smaDataBase;User ID=sa;Password=12qwert12";
-        //static string connectionString=@"Data Source=OZKARTA\OZKARTA;Initial Catalog=smaDataBase;Integrated Security=True";
-        static String connectionString  = @"Data Source=SPARE-PC\SQLEXPRESS;Initial Catalog=smaDataBase;Integrated Security=True";
+        static string connectionString=@"Data Source=OZKARTA\OZKARTA;Initial Catalog=smaDataBase;Integrated Security=True";
+        //static String connectionString  = @"Data Source=SPARE-PC\SQLEXPRESS;Initial Catalog=smaDataBase;Integrated Security=True";
        static  SqlConnection con;
        static  SqlDataAdapter adapter;
        static  SqlCommand cmd;

@@ -141,6 +141,3 @@ begin
 	select userGuid from usersGeneral where userName=@user
 end
 go 
-getAccessLevel 'ozkarta'
-go
-getUserGUID   'ozkarta'

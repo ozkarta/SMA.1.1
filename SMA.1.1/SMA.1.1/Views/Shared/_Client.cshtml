@@ -41,7 +41,7 @@
                     
                        
                     <li><h3 style="color:white">Welcome  @SMA._1._1.CS.Authentication.sessionPersister.userName</h3></li>
-                    <li>@Html.ActionLink("Log Out", "logout", "Account",null, new {@style="color:blue" })</li>      
+                    <li>@Html.ActionLink("Log Out", "logout", "Account", new { area = "" }, new { @style = "color:blue" })</li>      
                     <li>                    
                             <div class="dropdown" style="margin-top:inherit">
                                @{        
@@ -80,7 +80,7 @@
             
             var sa = $("#chooser option:selected").text().toString();
             var urlstring = "../Home/translate?currentView=@action.ToString()" + "&Language=" + sa + "&controller=@controller.ToString()";
-         alert(urlstring)
+         //alert(urlstring)
             document.getElementById("chooser").action = urlstring;
             document.getElementById("chooser").submit();
                          
