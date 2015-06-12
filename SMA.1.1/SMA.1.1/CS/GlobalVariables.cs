@@ -83,6 +83,25 @@ namespace SMA.CS
             variableTable.Add("login", "");
             variableTable.Add("register", "");
 
+            variableTable.Add("default_language", "");
+            variableTable.Add("registration_type", "");
+            variableTable.Add("registration_user_name", "");
+            variableTable.Add("registration_first_name", "");
+            variableTable.Add("registration_last_name", "");
+            variableTable.Add("registration_phone_number", "");
+            variableTable.Add("registration_email", "");
+            variableTable.Add("registration_passport_id", "");
+            variableTable.Add("registration_passwprd", "");
+            variableTable.Add("registration_confirm_passwprd", "");
+            variableTable.Add("register_button", "");
+            variableTable.Add("register_window_title", "");
+            variableTable.Add("register_page_title", "");
+            variableTable.Add("log_in_window_title", "");
+            variableTable.Add("log_in_user_name", "");
+            variableTable.Add("log_in_password", "");
+            variableTable.Add("log_in_button", "");
+            variableTable.Add("log_in_page_title", "");
+
         }
          public static void rollBackLanguage()
          {

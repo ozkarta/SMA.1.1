@@ -123,6 +123,16 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
     <Compile Include="Areas\Client\Controllers\ClientHomeController.cs" />
+    <Compile Include="Areas\CompanyHR\CompanyHRAreaRegistration.cs" />
+    <Compile Include="Areas\CompanyHR\Controllers\CompanyHRHomeController.cs" />
+    <Compile Include="Areas\CompanyManager\CompanyManagerAreaRegistration.cs" />
+    <Compile Include="Areas\CompanyManager\Controllers\CompanyManagerControllerHome.cs" />
+    <Compile Include="Areas\CompanyWorker\CompanyWorkerAreaRegistration.cs" />
+    <Compile Include="Areas\CompanyWorker\Controllers\CompanyWorkerHomeController.cs" />
+    <Compile Include="Areas\SMAAdministrator\Controllers\SMAAdministratorHomeController.cs" />
+    <Compile Include="Areas\SMAAdministrator\SMAAdministratorAreaRegistration.cs" />
+    <Compile Include="Areas\SMAManager\Controllers\SMAManagerHomeController.cs" />
+    <Compile Include="Areas\SMAManager\SMAManagerAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="CS\Authentication\ozzIdentity.cs" />
@@ -150,6 +160,26 @@
     <Content Include="Areas\Client\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Client\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Client\Views\ClientHome\Index.cshtml" />
+    <Content Include="Areas\CompanyWorker\Views\web.config" />
+    <Content Include="Areas\CompanyWorker\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\CompanyWorker\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\CompanyWorker\Views\CompanyWorkerHome\Index.cshtml" />
+    <Content Include="Areas\CompanyHR\Views\web.config" />
+    <Content Include="Areas\CompanyHR\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\CompanyHR\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\CompanyHR\Views\CompanyHRHome\Index.cshtml" />
+    <Content Include="Areas\CompanyManager\Views\web.config" />
+    <Content Include="Areas\CompanyManager\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\CompanyManager\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\CompanyManager\Views\CompanyManagerHome\Index.cshtml" />
+    <Content Include="Areas\SMAAdministrator\Views\web.config" />
+    <Content Include="Areas\SMAAdministrator\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\SMAAdministrator\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\SMAAdministrator\Views\SMAAdministratorHome\Index.cshtml" />
+    <Content Include="Areas\SMAManager\Views\web.config" />
+    <Content Include="Areas\SMAManager\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\SMAManager\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\SMAManager\Views\SMAManagerHome\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -192,6 +222,11 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Client\Models\" />
+    <Folder Include="Areas\CompanyHR\Models\" />
+    <Folder Include="Areas\CompanyManager\Models\" />
+    <Folder Include="Areas\CompanyWorker\Models\" />
+    <Folder Include="Areas\SMAAdministrator\Models\" />
+    <Folder Include="Areas\SMAManager\Models\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
