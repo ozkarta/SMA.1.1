@@ -91,8 +91,8 @@ namespace SMA.CS
             variableTable.Add("registration_phone_number", "");
             variableTable.Add("registration_email", "");
             variableTable.Add("registration_passport_id", "");
-            variableTable.Add("registration_passwprd", "");
-            variableTable.Add("registration_confirm_passwprd", "");
+            variableTable.Add("registration_password", "");
+            variableTable.Add("registration_confirm_password", "");
             variableTable.Add("register_button", "");
             variableTable.Add("register_window_title", "");
             variableTable.Add("register_page_title", "");
