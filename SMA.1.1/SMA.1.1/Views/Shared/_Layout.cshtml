@@ -71,14 +71,22 @@
                             
                                @using (Html.BeginForm(url, null, FormMethod.Post, new { id = "chooser" }))
                                {                            
-                                    @Html.DropDownList("chooser", GlobalVariables.languageListItems, new { onchange = "someLogic()" });
+                                    @Html.DropDownList("chooser", GlobalVariables.languageListItems, new { onchange = "someLogic()",@class = "form-control selectWidth"} );
                                }                            
                             </div>
-                    </li>
+                      </li>
                 </ul>                
             </div>            
         </div>
     </div>
+
+
+
+
+       
+
+
+
     <div class="container body-content">
         @RenderBody()
         <hr />

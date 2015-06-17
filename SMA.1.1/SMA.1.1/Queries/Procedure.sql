@@ -21,6 +21,13 @@ begin
 end
 go
 
+create procedure getVariableList
+as 
+begin
+	select distinct variableName from variables
+end
+
+go
 create procedure getAccessLevelsList
 as
 begin

@@ -26,7 +26,9 @@ namespace SMA.CS
             languageTable = new Hashtable();
             accessLevelsTable = new Hashtable();
 
-            manualInit();
+            //manualInit();
+            defaultInit();
+
             initVariables();
             initAccessLevelsList();
         }
@@ -101,6 +103,17 @@ namespace SMA.CS
             variableTable.Add("log_in_password", "");
             variableTable.Add("log_in_button", "");
             variableTable.Add("log_in_page_title", "");
+
+        }
+
+        public static void defaultInit()
+        {
+            Comunication.getLanguages(languageTable);
+            sessionPersister.currentLanguageTrial = "ქართული";
+            sessionPersister.currentLanguage = "ქართული";
+
+            Comunication.getVariableNames(variableTable);
+
 
         }
          public static void rollBackLanguage()

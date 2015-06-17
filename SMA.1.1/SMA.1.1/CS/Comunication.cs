@@ -110,6 +110,38 @@ namespace SMA.CS
             }
         }
 
+        public static void getVariableNames(Hashtable t)
+        {
+            using (con = new SqlConnection(connectionString))
+            {
+                using (cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "getVariableList";
+                    
+                        try
+                        {
+                            con.Open();
+                            reader = cmd.ExecuteReader();
+
+                            while (reader.Read())
+                            {
+                                t.Add(reader[0].ToString(), "");
+
+                            }
+                            cmd.Dispose();
+                            reader.Close();
+                            con.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine(ex.ToString());
+                        }
+                    
+                }
+            }
+        }
 
         public static void setAccesLevelHashTable()
         {
