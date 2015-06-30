@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace SMA._1._1.Areas.CompanyManager.Controllers
 {
-    public class CompanyManagerControllerHome : Controller
+    public class CompanyManagerHomeController : Controller
     {
         //
         // GET: /CompanyManager/CompanyManager/

@@ -16,82 +16,139 @@
     <title>@ViewBag.Title </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-   
+   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="../css/sb-admin.css" rel="stylesheet">
+
 </head>
 <body>
-    
-    
+    <div id="wrapper">
 
-   <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Ozzle", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Ozzle", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                    </ul>
+                    <ul class="nav navbar-nav" style="float: right">
+
+
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>@SMA._1._1.CS.Authentication.sessionPersister.userName <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#"><i class="fa fa-fw fa-user"></i>Profile</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="../Account/logout"><i class="fa fa-fw fa-power-off"></i>Log Out</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="dropdown" style="margin-top: inherit">
+                                @{        
+                                    string action = (string)ViewContext.Controller.ValueProvider.GetValue("action").RawValue;
+                                    string controller = (string)ViewContext.Controller.ValueProvider.GetValue("controller").RawValue;
+                                    string url = controller + "/" + action;
+                                }
+
+                                @using (Html.BeginForm(url, null, FormMethod.Post, new { id = "chooser" }))
+                                {                            
+                                    @Html.DropDownList("chooser", GlobalVariables.languageListItems, new { onchange = "someLogic()", @class = "form-control selectWidth" });
+                               }
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                   
-                </ul>   
-                <ul class="nav navbar-nav" style="float:right ">
-                    
-                    
-                    
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  @SMA._1._1.CS.Authentication.sessionPersister.userName <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
+        </div>
+
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li class="active">
+                    <a href="#"><i class="fa fa-fw fa-dashboard"></i>@GlobalVariables.getVariableValue("cm_workers")</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i>@GlobalVariables.getVariableValue("cm_hrs")</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-table"></i>@GlobalVariables.getVariableValue("cm_company_info")</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-edit"></i>@GlobalVariables.getVariableValue("cm_charts")</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-desktop"></i>@GlobalVariables.getVariableValue("cm_history")</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-wrench"></i>@GlobalVariables.getVariableValue("cm_partners")</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-wrench"></i>@GlobalVariables.getVariableValue("cm_subscribes")</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-wrench"></i>@GlobalVariables.getVariableValue("cm_messages")</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-wrench"></i>@GlobalVariables.getVariableValue("cm_portfolio")</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-wrench"></i>@GlobalVariables.getVariableValue("cm_contact_to_administration")</a>
+                </li>
+
+                <!--
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
                             <li>
-                                <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                                <a href="#">Dropdown Item</a>
                             </li>
-                            <li class="divider"></li>
                             <li>
-                                <a href="../Account/logout"><i class="fa fa-fw fa-power-off"></i>Log Out</a>
+                                <a href="#">Dropdown Item</a>
                             </li>
                         </ul>
                     </li>
-                    <li>                    
-                            <div class="dropdown" style="margin-top:inherit">
-                               @{        
-                                   string action = (string)ViewContext.Controller.ValueProvider.GetValue("action").RawValue;
-                                   string controller = (string)ViewContext.Controller.ValueProvider.GetValue("controller").RawValue;
-                                   string url = controller + "/" + action;
-                               }
-                            
-                               @using (Html.BeginForm(url, null, FormMethod.Post, new { id = "chooser" }))
-                               {                            
-                                    @Html.DropDownList("chooser", GlobalVariables.languageListItems, new { onchange = "someLogic()",@class = "form-control selectWidth"} );
-                               }                            
-                            </div>
-                      </li>
-                 </ul>
-                                  
-            </div>            
+                    -->
+            </ul>
         </div>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                </footer>
+
+            </div>
+        </div>
+
+
     </div>
-
-
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
     <script type="text/javascript">
         function someLogic() {
-            
-            
+
+
             var sa = $("#chooser option:selected").text().toString();
             var urlstring = "../Home/translate?currentView=@action.ToString()" + "&Language=" + sa + "&controller=@controller.ToString()";
-         alert(urlstring)
+            alert(urlstring)
             document.getElementById("chooser").action = urlstring;
             document.getElementById("chooser").submit();
-                         
+
 
         }
     </script>

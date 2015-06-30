@@ -60,6 +60,10 @@ namespace SMA.CS
         }
         public static bool logInCheck(string user,string pass)
         {
+            if (!validateUserAndPassword(user,pass))
+            {
+                return false;
+            }
             return Comunication.checkUserAndPassword(user, pass);            
         }
 
@@ -84,6 +88,7 @@ namespace SMA.CS
         }
         public static string generateHashedPSWD(string text, string saltString)
         {
+            
             byte[] plainText = Convert.FromBase64String(Convert.ToBase64String(Encoding.UTF8.GetBytes(text)));
             byte[] salt = Convert.FromBase64String(saltString);
             HashAlgorithm algorithm = new SHA256Managed();
@@ -106,6 +111,14 @@ namespace SMA.CS
 
         //____________________________________________________________________________________________________________---
 
-
+        public static bool validateUserAndPassword(string text,string password)
+        {
+            if(text.Trim()=="" || password.Trim()=="")
+                return false;
+            else
+                return true;
+        }
     }
+
+  
 }

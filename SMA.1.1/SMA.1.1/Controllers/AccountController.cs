@@ -10,6 +10,15 @@ using SMA._1._1.CS.Authentication;
 
 namespace SMA.Controllers
 {
+
+
+    //
+    //
+    //          SAITS EMATEBA  KOMPANIEBISTVIS PERSONALURI  SAITEBIS AWYOBA  romlebic mibmulebi iknebian  ozzle-s domanze
+    //
+    //
+    //
+
     public class AccountController : Controller
     {
         public ActionResult Index()
@@ -96,11 +105,19 @@ namespace SMA.Controllers
 
         public ActionResult Register()
         {
+            if (checkIfLoggedInAndRedirect() != null)
+            {
+                return checkIfLoggedInAndRedirect();
+            }
             ViewBag.ErrorMessage = "";
             return View("Register");
         }
         public ActionResult LogIn()
         {
+            if (checkIfLoggedInAndRedirect() != null)
+            {
+                return checkIfLoggedInAndRedirect();
+            }
             ViewBag.ErrorMessage = "";
             return View("LogIn");
         }
@@ -123,6 +140,18 @@ namespace SMA.Controllers
         {
             sessionPersister.logout();
             return RedirectToAction("Index", "Home");
+        }
+
+        public RedirectToRouteResult checkIfLoggedInAndRedirect()
+        {
+            if (sessionPersister.userRole != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

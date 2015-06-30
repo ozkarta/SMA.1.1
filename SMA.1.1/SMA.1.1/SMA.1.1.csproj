@@ -126,7 +126,7 @@
     <Compile Include="Areas\CompanyHR\CompanyHRAreaRegistration.cs" />
     <Compile Include="Areas\CompanyHR\Controllers\CompanyHRHomeController.cs" />
     <Compile Include="Areas\CompanyManager\CompanyManagerAreaRegistration.cs" />
-    <Compile Include="Areas\CompanyManager\Controllers\CompanyManagerControllerHome.cs" />
+    <Compile Include="Areas\CompanyManager\Controllers\CompanyManagerHomeController.cs" />
     <Compile Include="Areas\CompanyWorker\CompanyWorkerAreaRegistration.cs" />
     <Compile Include="Areas\CompanyWorker\Controllers\CompanyWorkerHomeController.cs" />
     <Compile Include="Areas\SMAAdministrator\Controllers\SMAAdministratorHomeController.cs" />

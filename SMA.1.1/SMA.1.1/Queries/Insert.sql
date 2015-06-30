@@ -3,6 +3,7 @@ go
 delete from languages
 delete from variables
 delete  from accessLevels
+delete from usersGeneral
 
 declare @en as varchar(50)
 set @en=newid()
@@ -70,8 +71,6 @@ values  ------------------------------------------
 		(@ge,newid(),'log_in_password',N'პაროლი'),
 		(@ge,newid(),'log_in_button',N'სისტემაში შესვლა'),
 		(@ge,newid(),'log_in_page_title',N'ავტორიზაცია  Ozzle - ზე'),		
-		
-
 		------------------------------------------------
 		--client  space  
 		------------------------------------------------
@@ -93,7 +92,6 @@ values  ------------------------------------------
 		(@ge,newid(),'client_portfolio',N'პორტფოლიო'),
 		(@ge,newid(),'client_messages',N'შეტყობინებები'),
 		(@ge,newid(),'client_history',N'ისტორია'),
-
 		--------------------------------------------------------
 		--Worker Area 
 		--------------------------------------------------------
@@ -113,9 +111,74 @@ values  ------------------------------------------
 		(@ge,newid(),'worker_portfolio',N'პორტფოლიო'),
 		(@ge,newid(),'worker_messages',N'შეტყობინებები'),
 		(@ge,newid(),'worker_scheduler',N'განრიგი'),
-		(@ge,newid(),'worker_subscribes',N'გამოწერები')
+		(@ge,newid(),'worker_subscribes',N'გამოწერები'),
 		--------------------------------------------------------
-		--
+		--HR   AREA
+		--------------------------------------------------------
+		(@en,newid(),'HR_workers',N'Workers'),
+		(@en,newid(),'HR_vacancies',N'Vacancies'),
+		(@en,newid(),'HR_company',N'Company'),
+		(@en,newid(),'HR_find_jobs',N'Find Jobs'),
+		(@en,newid(),'HR_subscribes',N'Subscribes'),
+		(@en,newid(),'HR_messages',N'Messages'),
+		(@en,newid(),'HR_portfolio',N'Portfolio'),
+
+		(@ge,newid(),'HR_workers',N'პერსონალი'),
+		(@ge,newid(),'HR_vacancies',N'ვაკანსიები'),
+		(@ge,newid(),'HR_company',N'კომპანია'),
+		(@ge,newid(),'HR_find_jobs',N'სამუშაოს ძებნა'),
+		(@ge,newid(),'HR_subscribes',N'გამოწერები'),
+		(@ge,newid(),'HR_messages',N'მესიჯები'),
+		(@ge,newid(),'HR_portfolio',N'პორტფოლიო'),
+		--------------------------------------------------------
+		--Company Manager
+		--------------------------------------------------------
+		(@en,newid(),'cm_workers',N'Workers'),
+		(@en,newid(),'cm_hrs',N'Human Resources'),
+		(@en,newid(),'cm_company_info',N'My Company'),
+		(@en,newid(),'cm_history',N'Hostory'),
+		(@en,newid(),'cm_messages',N'Messages'),
+		(@en,newid(),'cm_subscribes',N'Subscribes'),
+		(@en,newid(),'cm_partners',N'Partners'),
+		(@en,newid(),'cm_charts',N'Charts'),
+		(@en,newid(),'cm_portfolio',N'Portfolio'),
+		(@en,newid(),'cm_contact_to_administration',N'Contact To System Administration'),
+
+
+		(@ge,newid(),'cm_workers',N'თანამშრომლები'),
+		(@ge,newid(),'cm_hrs',N'ვებერები'),
+		(@ge,newid(),'cm_company_info',N'კომპანია'),
+		(@ge,newid(),'cm_history',N'ისტორია'),
+		(@ge,newid(),'cm_messages',N'მესიჯები'),
+		(@ge,newid(),'cm_subscribes',N'გამოწერები'),
+		(@ge,newid(),'cm_partners',N'პარტნიორები'),
+		(@ge,newid(),'cm_charts',N'ვიზუალიზაცია'),
+		(@ge,newid(),'cm_portfolio',N'პორტფოლიო'),
+		(@ge,newid(),'cm_contact_to_administration',N'კონტაქტი ადმინისტრაციასთან'),
+		--------------------------------------------------------
+		--SMA Administrator
+		--------------------------------------------------------
+		(@en,newid(),'SMA_ADMIN_company_list',N'Company List'),
+		(@en,newid(),'SMA_ADMIN_client_list',N'Client List'),
+		(@en,newid(),'SMA_ADMIN_compliants',N'Compliants'),
+		(@en,newid(),'SMA_ADMIN_site_managment',N'Web  Site Management'),
+		(@en,newid(),'SMA_ADMIN_requests',N'Partnership Requests'),
+		(@en,newid(),'SMA_ADMIN_support',N'Support'),
+		(@en,newid(),'SMA_ADMIN_messages',N'Messages'),
+		(@en,newid(),'SMA_ADMIN_portfolio',N'Portfolio'),
+		(@en,newid(),'SMA_ADMIN_schedule',N'Schedule'),
+
+		(@ge,newid(),'SMA_ADMIN_company_list',N'კომპანიები'),
+		(@ge,newid(),'SMA_ADMIN_client_list',N'კლიენტები'),
+		(@ge,newid(),'SMA_ADMIN_compliants',N'საჩივრები'),
+		(@ge,newid(),'SMA_ADMIN_site_managment',N'საიტის მენეგმენტი'),
+		(@ge,newid(),'SMA_ADMIN_requests',N'პარტნიორობის შემოთავაზებები'),
+		(@ge,newid(),'SMA_ADMIN_support',N'სუპორტი'),
+		(@ge,newid(),'SMA_ADMIN_messages',N'შეტყობინებები'),
+		(@ge,newid(),'SMA_ADMIN_portfolio',N'პორტფოლიო'),
+		(@ge,newid(),'SMA_ADMIN_schedule',N'განრიგი')
+		--------------------------------------------------------
+		--SMA Manager
 		--------------------------------------------------------
 
 		--------------------------------------------------------
@@ -148,4 +211,28 @@ insert into accessLevels(levelGUID,levelName,[level])
 
 go
 
-select * from accessLevels
+
+
+
+insert into usersGeneral
+select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='visitor'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaVisitor','ozbegi','kartvelishvili','',getdate() 
+go
+insert into usersGeneral
+select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='Client'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaClient','ozbegi','kartvelishvili','',getdate() 
+go
+insert into usersGeneral
+select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='CompanyWorker'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaWorker','ozbegi','kartvelishvili','',getdate()
+go
+insert into usersGeneral
+select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='CompanyHR'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaCHR','ozbegi','kartvelishvili','',getdate()
+go
+insert into usersGeneral
+select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='CompanyManager'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaCManager','ozbegi','kartvelishvili','',getdate() 
+go
+insert into usersGeneral
+select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='SMAAdministrator'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaSMAAdmin','ozbegi','kartvelishvili','',getdate() 
+go
+insert into usersGeneral
+select '8F6A4B38-7C66-4498-A5FA-9259D09347F0',newid(),(select levelGUID from accessLevels where levelName='SMAManager'),'ozbegi3@gmail.com',1,'agxiZ8+UL9GeeXhNNhCcPaqGd/QM/lLKd5hHy+UgFeE=','3bh6MaLFHWovRhzUf4fmLxf8IwmnEffzkMHo0fqqkew=','',1,0,'ozkartaSMAManager','ozbegi','kartvelishvili','',getdate() 
+go
+
