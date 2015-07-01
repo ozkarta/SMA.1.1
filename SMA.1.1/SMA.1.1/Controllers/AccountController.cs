@@ -51,7 +51,9 @@ namespace SMA.Controllers
 
                         if (GlobalMethods.registerUser(defaultLanguage, accessLevel, userName, firstName, lastName, phone, email, password, passportId))
                         {
-                            ViewBag.ErrorMessage = "";
+                            //ViewBag.ErrorMessage = "";
+                            GlobalVariables.errorOnRegister = false;
+                            GlobalVariables.errorOnRegisterMessage = "";
                             ViewBag.Message = "Registration was complete succesfully, To activate your profile please  check " +
                                                 " mail  <h4>"+email+"</h4>  and follow  instructions  ";
 
@@ -59,33 +61,41 @@ namespace SMA.Controllers
                         }
                         else
                         {
-                            ViewBag.ErrorMessage = "There was error registerring the user, Please try later.";
-                            return View("Register");
+                            //ViewBag.ErrorMessage = "There was error registerring the user, Please try later.";
+                            GlobalVariables.errorOnRegister = true;
+                            GlobalVariables.errorOnRegisterMessage = "There was error registerring the user, Please try later.";
+                            return RedirectToAction("Register","Account");
                         }
 
                     }
                     else
                     {
-                        ViewBag.ErrorMessage = "User name you entered already exists";
-                        return View("Register");
+                        //ViewBag.ErrorMessage = "User name you entered already exists";
+                        GlobalVariables.errorOnRegister = true;
+                        GlobalVariables.errorOnRegisterMessage = "User name you entered already exists";
+                        return RedirectToAction("Register", "Account");
                     }
                 }
                 else
                 {
-                    ViewBag.ErrorMessage = "The Password is incorrect";
-                    return View("Register");
+                    //ViewBag.ErrorMessage = "The Password is incorrect";
+                    GlobalVariables.errorOnRegister = true;
+                    GlobalVariables.errorOnRegisterMessage = "The Password is incorrect";
+                    return RedirectToAction("Register", "Account");
                 }
 
             }
             else
             {
-                ViewBag.ErrorMessage = "The Mail Is Incorrect";
-                return View("Register");
+               // ViewBag.ErrorMessage = "The Mail Is Incorrect";
+                GlobalVariables.errorOnRegister = true;
+                GlobalVariables.errorOnRegisterMessage = "The Mail Is Incorrect";
+                return RedirectToAction("Register", "Account");
             }
         }
 
         [HttpPost]
-        public ActionResult LogInValidation()
+        public RedirectToRouteResult LogInValidation()
         {
             string userName = Request["user_name"].ToString();
             string password = Request["password"].ToString();
@@ -97,8 +107,9 @@ namespace SMA.Controllers
             }
             else
             {
-                ViewBag.ErrorMessage = "UserName or Password Is incorrect";
-                return View("LogIn");
+                //ViewBag.ErrorMessage = "UserName or Password Is incorrect";
+                GlobalVariables.errorOnLogIn = true;
+                return RedirectToAction("LogIn","Account");
             }
             
         }
@@ -109,7 +120,18 @@ namespace SMA.Controllers
             {
                 return checkIfLoggedInAndRedirect();
             }
-            ViewBag.ErrorMessage = "";
+            if (GlobalVariables.errorOnRegister)
+            {
+                ViewBag.ErrorMessage = GlobalVariables.errorOnRegisterMessage;
+                GlobalVariables.errorOnRegisterMessage = "";
+                GlobalVariables.errorOnRegister = false;
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "";
+            }
+
+
             return View("Register");
         }
         public ActionResult LogIn()
@@ -118,7 +140,15 @@ namespace SMA.Controllers
             {
                 return checkIfLoggedInAndRedirect();
             }
-            ViewBag.ErrorMessage = "";
+            if (GlobalVariables.errorOnLogIn)
+            {
+                ViewBag.ErrorMessage = "UserName or Password Is incorrect";
+                GlobalVariables.errorOnLogIn = false;
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "";
+            }
             return View("LogIn");
         }
         public RedirectToRouteResult EmailConfirmation()

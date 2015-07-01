@@ -19,7 +19,9 @@ namespace SMA.CS
         public static List<SelectListItem> languageListItems = new List<SelectListItem>();
         public static List<SelectListItem> accessLevelsListItems = new List<SelectListItem>();
 
-
+        public static Boolean errorOnLogIn;
+        public static Boolean errorOnRegister;
+        public static string errorOnRegisterMessage;
         static GlobalVariables()
         {
             variableTable = new Hashtable();
@@ -111,9 +113,11 @@ namespace SMA.CS
             Comunication.getLanguages(languageTable);
             sessionPersister.currentLanguageTrial = "ქართული";
             sessionPersister.currentLanguage = "ქართული";
-
             Comunication.getVariableNames(variableTable);
 
+            errorOnLogIn = false;
+            errorOnRegister = false;
+            errorOnRegisterMessage = "";
 
         }
          public static void rollBackLanguage()
